@@ -61,13 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const cell = document.querySelector(
                     `.cell[data-row="${row}"][data-col="${col}"]`
                 );
+                
                 cell.classList.add(currentPlayer);
                 if (checkWinner(row, col)) {
                     message.textContent = `${currentPlayer.toUpperCase()} wins!`;
                     incrementStat(currentPlayer + "Wins");
                     incrementStat("totalGames");
                     gameActive = false;
-                } else if (board.flat().every((cell) => cell)) {
+                } else if (board.flat().every((cell) => cell)) { // tutte le celle sono diverse da null
                     message.textContent = "It's a draw!";
                     incrementStat("totalGames");
                     gameActive = false;
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     };
+
 
     const checkWinner = (row, col) => {
         const directions = [
@@ -94,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             count += countInDirection(row, col, -x, -y);
             if (count >= 4) return true;
         }
+
         return false;
     };
 
